@@ -24,7 +24,7 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Database access object to access the Inventory database
+ * mengatur Database access object (dao) agar bisa menggunakan method pada database
  */
 @Dao
 interface ItemDao {

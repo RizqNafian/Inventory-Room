@@ -22,7 +22,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 /**
- * Database class with a singleton INSTANCE object.
+ * mengatur tempat dan server untuk database degan objek instance tunggal
  */
 @Database(entities = [Item2::class], version = 1, exportSchema = false)
 abstract class ItemRoomDatabase : RoomDatabase() {
@@ -34,16 +34,14 @@ abstract class ItemRoomDatabase : RoomDatabase() {
         private var INSTANCE: ItemRoomDatabase? = null
 
         fun getDatabase(context: Context): ItemRoomDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
+            // mengatur logika pembuatan database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ItemRoomDatabase::class.java,
                     "item_database"
                 )
-                    // Wipes and rebuilds instead of migrating if no Migration object.
-                    // Migration is not part of this codelab.
+                    // Menghapus dan membangun kembali (tidak melakukan migrasi)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

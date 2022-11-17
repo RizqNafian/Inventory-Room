@@ -24,13 +24,13 @@ import com.example.inventory.data.ItemDao
 import kotlinx.coroutines.launch
 
 /**
- * View Model to keep a reference to the Inventory repository and an up-to-date list of all items.
+ * View Model untuk menyimpan referensi ke repositori Inventaris dan daftar terbaru semua item.
  *
  */
 class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 
     /**
-     * Inserts the new Item into database.
+     * memasukan data baru ke databse.
      */
     fun addNewItem(itemName: String, itemPrice: String, itemCount: String, buyPrice: String) {
         val newItem = getNewItemEntry(itemName, itemPrice, itemCount, buyPrice)
@@ -38,7 +38,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     /**
-     * Launching a new coroutine to insert an item in a non-blocking way
+     * Meluncurkan coroutine baru untuk menyisipkan item
      */
     private fun insertItem(item: Item2) {
         viewModelScope.launch {
@@ -47,7 +47,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     /**
-     * Returns true if the EditTexts are not empty
+     * Mengembalikan nilai true jika EditTexts tidak kosong
      */
     fun isEntryValid(itemName: String, itemPrice: String, itemCount: String, buyPrice: String): Boolean {
         if (itemName.isBlank() || itemPrice.isBlank() || itemCount.isBlank() || buyPrice.isBlank()) {
@@ -57,8 +57,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
     }
 
     /**
-     * Returns an instance of the [Item] entity class with the item info entered by the user.
-     * This will be used to add a new entry to the Inventory database.
+     * Mengembalikan instance kelas entitas
      */
     private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String, buyPrice: String): Item2 {
         return Item2(
@@ -71,7 +70,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
 }
 
 /**
- * Factory class to instantiate the [ViewModel] instance.
+ * Factory class untuk membuat instance [ViewModel].
  */
 class InventoryViewModelFactory(private val itemDao: ItemDao) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

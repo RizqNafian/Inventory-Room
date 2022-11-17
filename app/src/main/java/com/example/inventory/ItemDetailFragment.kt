@@ -27,7 +27,7 @@ import com.example.inventory.databinding.FragmentItemDetailBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
- * [ItemDetailFragment] displays the details of the selected item.
+ * menampilkan detail item yang dipilih
  */
 class ItemDetailFragment : Fragment() {
     private val navigationArgs: ItemDetailFragmentArgs by navArgs()
@@ -45,7 +45,7 @@ class ItemDetailFragment : Fragment() {
     }
 
     /**
-     * Displays an alert dialog to get the user's confirmation before deleting the item.
+     * menampilkan dialog peringatan saat akan menghapus data
      */
     private fun showConfirmationDialog() {
         MaterialAlertDialogBuilder(requireContext())
@@ -60,14 +60,14 @@ class ItemDetailFragment : Fragment() {
     }
 
     /**
-     * Deletes the current item and navigates to the list fragment.
+     * menghupus item ini dan mengembalikan ke halaman utama
      */
     private fun deleteItem() {
         findNavController().navigateUp()
     }
 
     /**
-     * Called when fragment is destroyed.
+     * memanggil fragment selnjutnya sebelum fragmen dihancurkan.
      */
     override fun onDestroyView() {
         super.onDestroyView()

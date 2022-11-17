@@ -29,24 +29,21 @@ import com.example.inventory.data.Item2
 import com.example.inventory.databinding.FragmentAddItemBinding
 
 /**
- * Fragment to add or update an item in the Inventory database.
+ * Fragment untuk menambahkan item ke database
  */
 class AddItemFragment : Fragment() {
 
     private val navigationArgs: ItemDetailFragmentArgs by navArgs()
     lateinit var item: Item2
 
-    // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
-    // to share the ViewModel across fragments.
+    // membagikan ViewModel ke seluruh fragmen.
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database.itemDao()
         )
     }
 
-    // Binding object instance corresponding to the fragment_add_item.xml layout
-    // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
-    // when the view hierarchy is attached to the fragment
+    // instance objek yang sesuai dengan tata letak FragmentAddItem
     private var _binding: FragmentAddItemBinding? = null
     private val binding get() = _binding!!
 
@@ -60,7 +57,7 @@ class AddItemFragment : Fragment() {
     }
 
     /**
-     * Returns true if the EditTexts are not empty
+     * Mengembalikan nilai true jika EditTexts tidak kosong
      */
     private fun isEntryValid(): Boolean {
         return viewModel.isEntryValid(
@@ -72,7 +69,7 @@ class AddItemFragment : Fragment() {
     }
 
     /**
-     * Inserts the new Item into database and navigates up to list fragment.
+     * Insert item baru ke dalam database dan mengarahkan ke fragmen ItemList.
      */
     private fun addNewItem() {
         if (isEntryValid()) {
@@ -88,10 +85,8 @@ class AddItemFragment : Fragment() {
     }
 
     /**
-     * Called when the view is created.
-     * The itemId Navigation argument determines the edit item  or add new item.
-     * If the itemId is positive, this method retrieves the information from the database and
-     * allows the user to update it.
+     * menentukan item diedit atau menambahkan dengan mengambil informasi dari
+     * database berdasar itemid.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -101,7 +96,7 @@ class AddItemFragment : Fragment() {
     }
 
     /**
-     * Called before fragment is destroyed.
+     * memanggil fragment selnjutnya sebelum fragmen dihancurkan.
      */
     override fun onDestroyView() {
         super.onDestroyView()
